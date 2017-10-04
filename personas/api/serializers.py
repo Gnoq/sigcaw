@@ -82,6 +82,8 @@ class BomberoSerializer(serializers.ModelSerializer):
 	persona = PersonaSerializer(read_only=True)
 	lugar_nacimiento = LocalidadSerializer()
 	numero_orden_bombero = NumeroOrdenSerializer(many=True, read_only=True)
+	entidad_DireccionPostal = DireccionPostalSerializer(many=True, read_only=True)
+	entidad_DireccionWeb = DireccionWebSerializer(many=True, read_only=True)
 	#lugar_nacimiento = serializers.RelatedField(source='lugar_nacimiento.codigo_postal', queryset=Localidad.objects.all())
 	class Meta:
 		model = Bombero
@@ -93,5 +95,7 @@ class BomberoSerializer(serializers.ModelSerializer):
 			'fecha_vencimiento',
 			'estado_civil',
 			'numero_orden_bombero',
+			'entidad_DireccionPostal',
+			'entidad_DireccionWeb',
 		]
 
