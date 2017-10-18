@@ -5,6 +5,7 @@ from personas.models import (
 	Persona, 
 	NumeroOrden,
 	DireccionWeb,
+    DireccionPostal
 	)
 
 from personas.api.serializers import (
@@ -48,3 +49,8 @@ class NumeroOrdenListAPIView(ListAPIView):
 class DireccionWebListAPIView(ListAPIView):
 	queryset = DireccionWeb.objects.all()
 	serializer_class = DireccionWebSerializer
+
+
+class DireccionPostalListAPIView(ListAPIView):
+    queryset = DireccionPostal.objects.all()
+    serializer_class = DireccionPostalSerializer

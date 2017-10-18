@@ -16,10 +16,7 @@ from localidades.api.serializers import LocalidadSerializer
 class EntidadSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = Entidad
-		fields = [
-			'tipo_cuit',
-			'nro_cuit',
-		]
+		fields = ['tipo_cuit', 'nro_cuit']
 
 
 class PersonaSerializer(EntidadSerializer):
@@ -45,23 +42,14 @@ class NumeroOrdenSerializer(serializers.ModelSerializer):
 		]
 
 
-class MedioSerializer(serializers.ModelSerializer):
-	medio_entidad = EntidadSerializer(read_only=True)
-	class Meta:
-		models = Medio
-		fields = [
-			'medio_entidad',
-			'uso',
-			'observaciones',
-		]
-
-
 class DireccionPostalSerializer(serializers.ModelSerializer):
 	localidad = LocalidadSerializer()
-	class Meta: 
+	entidad_DireccionPostal = EntidadSerializer()
+	class Meta:
 		model = DireccionPostal
 		fields = [
 			'localidad',
+			'entidad_DireccionPostal',
 			'calle',
 			'numero',
 			'piso',
@@ -82,8 +70,8 @@ class BomberoSerializer(serializers.ModelSerializer):
 	persona = PersonaSerializer(read_only=True)
 	lugar_nacimiento = LocalidadSerializer()
 	numero_orden_bombero = NumeroOrdenSerializer(many=True, read_only=True)
-	entidad_DireccionPostal = DireccionPostalSerializer(many=True, read_only=True)
-	entidad_DireccionWeb = DireccionWebSerializer(many=True, read_only=True)
+	#entidad_DireccionPostal = MedioDPSerializer(many=True, read_only=True)
+	#entidad_DireccionWeb = DireccionWebSerializer(many=True, read_only=True)
 	#lugar_nacimiento = serializers.RelatedField(source='lugar_nacimiento.codigo_postal', queryset=Localidad.objects.all())
 	class Meta:
 		model = Bombero
@@ -95,7 +83,6 @@ class BomberoSerializer(serializers.ModelSerializer):
 			'fecha_vencimiento',
 			'estado_civil',
 			'numero_orden_bombero',
-			'entidad_DireccionPostal',
-			'entidad_DireccionWeb',
+			#'entidad_DireccionPostal',
+			#'entidad_DireccionWeb',
 		]
-
